@@ -2,6 +2,7 @@ package com.study.spring.case06.tx.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.study.spring.case06.tx.dao.BookDao;
 
@@ -11,6 +12,7 @@ public class BookServiceImpl implements BookService{
 	@Autowired
 	private BookDao bookDao;
 	
+	@Transactional
 	@Override
 	public void buyOne(Integer wid, Integer bid) {
 		int price=bookDao.getPrice(bid);
