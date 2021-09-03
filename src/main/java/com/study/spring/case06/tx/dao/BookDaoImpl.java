@@ -5,6 +5,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.spring.case06.tx.exception.InufficientAmount;
+import com.study.spring.case06.tx.exception.InufficientQuantity;
+
 @Repository
 public class BookDaoImpl implements BookDao {
 	
@@ -20,7 +23,7 @@ public class BookDaoImpl implements BookDao {
 
 	
 	@Override
-	public Integer updateStock(Integer bid) {
+	public Integer updateStock(Integer bid) throws InufficientQuantity{
 		//檢查庫存
 		String sql="Select amount from stock where bid=?";
 		Object[] args=new Object[] {bid};
@@ -36,7 +39,7 @@ public class BookDaoImpl implements BookDao {
 	
 	
 	@Override
-	public Integer updateWallet(Integer wid, Integer money) {
+	public Integer updateWallet(Integer wid, Integer money) throws InufficientAmount{
 		//檢查餘額是否足夠
 		
 		String sql="Select money from wallet where wid=?";
@@ -48,7 +51,8 @@ public class BookDaoImpl implements BookDao {
 		}		
 		
 		//修改餘額
-		sql = "update wallet set money = money - ? where wid=? ";
+		sql = "update wallet set money = money - ? where wid=?";
+		args = new Object[]{money, wid};
 		return jdbcTemplate.update(sql, args);
 	}
 	
