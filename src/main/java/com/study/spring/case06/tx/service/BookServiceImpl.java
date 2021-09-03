@@ -17,8 +17,8 @@ public class BookServiceImpl implements BookService{
 	private BookDao bookDao;
 	
 	@Transactional(
-			rollbackFor = {InufficientAmount.class,InufficientQuantity.class},
-			noRollbackFor = {RuntimeException.class}
+			rollbackFor = {InufficientAmount.class,InufficientQuantity.class}
+			//noRollbackFor = {RuntimeException.class}
 	)
 	@Override
 	public void buyOne(Integer wid, Integer bid) throws InufficientAmount,InufficientQuantity{

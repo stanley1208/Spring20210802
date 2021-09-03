@@ -24,11 +24,7 @@ public class BuyBook {
 		int wid=1;
 		int bid=1;
 		bookController.buyBook(wid, bid);
-		try {
-			
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		
 		
 	}
 }

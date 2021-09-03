@@ -30,7 +30,7 @@ public class BookDaoImpl implements BookDao {
 		      
 		int amount=jdbcTemplate.queryForObject(sql, args,Integer.class);
 		if(amount<=0) {
-			throw new RuntimeException("庫存不足");
+			throw new InufficientQuantity();
 		}
 		//修改庫存
 		sql = "update stock set amount = amount - 1 where bid=? ";
@@ -47,7 +47,7 @@ public class BookDaoImpl implements BookDao {
 				      
 		int walletmoney=jdbcTemplate.queryForObject(sql, args,Integer.class);
 		if(walletmoney<=money) {
-			throw new RuntimeException("餘額不足");
+			throw new InufficientAmount();
 		}		
 		
 		//修改餘額
